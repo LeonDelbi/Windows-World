@@ -1448,15 +1448,7 @@ class Agent {
         text = removeBackslashEnclosedText(text);
         say = replaceAll(say, "{NAME}", this.userPublic.name);
         say = replaceAll(say, "{COLOR}", this.color);
-        say = replaceAll(say, "gif", "ghif");
-        say = replaceAll(say, "~", "!");
         say = replaceAll(say, "touhou", "[['toUhoU]] ");
-        say = replaceAll(say, ":3", "[[nj'A:]] ");
-        say = replaceAll(say, "&gt;w&lt;", "[[nj'A:]] ");
-        say = replaceAll(say, "^w^", "[[nj'A:]] ");
-        say = replaceAll(say, "-w-", "[[nj'A:]] ");
-        say = replaceAll(say, "TwT", "[[nj'A:]] ");
-        say = replaceAll(say, "s's's's'", "Nope ");
         // temporary disable until we find a fix
         var greentext = text.substring(0, 4) == "&gt;" || text[0] == ">";
 
