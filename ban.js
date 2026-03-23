@@ -56,7 +56,7 @@ exports.removeBan = function(ip) {
 };
 
 exports.handleBan = function(socket) {
-	var ip = socket.handshake.headers['cf-connecting-ip'] || socket.request.connection.remoteAddress;
+	var ip = socket.handshake.headers['x-forwarded-for'] || socket.request.connection.remoteAddress;
 	if (bans[ip].end <= new Date().getTime()) {
 		exports.removeBan(ip);
 		return false;
