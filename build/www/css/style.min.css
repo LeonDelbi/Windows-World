@@ -617,7 +617,7 @@ body.classic #content  {
   top: 0;
 }
 
-#chat_send {
+#chat_send, #start_button {
   width: 100px;
   user-select: none;
   font-family: "Tahoma", "Comic Sans", cursive;
@@ -633,11 +633,19 @@ body.classic #content  {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
   padding-left: 35px;
 }
-#chat_send:hover {
+#chat_send:hover, #start_button:hover {
   background-position: 0 -33px;
 }
-#chat_send:active {
+#chat_send:active, #start_button:active {
   background-position: 0 -67px;
+}
+
+#start_button {
+    background-image: url("../img/desktop/startthin.png");
+    padding-left: 7px;
+    margin-left: -6px;
+    width: 33px;
+    z-index: 1;
 }
 
 #chat_message_cont {
