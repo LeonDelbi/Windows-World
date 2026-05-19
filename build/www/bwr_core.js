@@ -10,6 +10,49 @@ let typingTimeout;
 let typing = false;
 let espeaktts = false;
 
+$(document).ready(function() {
+        // Target the "Send" button
+        $("#start_button").click(function() {
+
+            if (localStorage.name) {
+                $("#start_menu_name").val(localStorage.name);
+            }
+
+            // Toggle the visibility of the start menu
+            $("#start_menu").toggle();
+            
+            // Ensure the 'hidden' attribute is removed if it's being used
+            $("#start_menu").removeAttr("hidden");
+        });
+
+        // Optional: Close the menu if clicking anywhere else on the page
+        $(document).click(function(event) {
+            if (!$(event.target).closest('#start_menu, #start_button').length) {
+                $("#start_menu").hide();
+            }
+        });
+    });
+
+$(document).ready(function() {
+    // Existing chat_send logic...
+    
+    // Fix: Wrap the settings button logic here
+    $("#settings_button").click(function() {
+        $("#start_menu").attr("hidden", true); // Using jQuery to match your style
+        openSettings();
+    });
+});
+
+$(document).ready(function() {
+    // Existing chat_send logic...
+
+    // Fix: Wrap the help button logic here
+    $("#help_button").click(function() {
+        $("#start_menu").attr("hidden", true); // Using jQuery to match your style
+        helpPopup();
+    });
+});
+
 const { entries, values } = Object;
 const { isArray } = Array;
 const { seedrandom, random, floor } = Math;
@@ -243,16 +286,30 @@ function time() {
     return `${hourString}:${minuteString} ${ampm}`;
 }
 
+function sanitize(text) {
+    return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;")
+        .replaceAll("'", "&apos;");
+}
+
+window.onclick = (e) => {
+    let spoiler = e.target.closest("GAY-SPOILER");
+    if (spoiler) spoiler.classList.add("reveal");
+};
+
 let rules = {
     "**": "b",
     "~~": "i",
     "--": "s",
-    __: "u",
+    "__": "u",
     "``": "code",
     "^^": "gay-big", // these are fine
-    $r$: "gay-rainbow",
+    "$r$": "gay-rainbow",
     "||": "gay-spoiler",
-};
+}
 
 function markup(text) {
     text = text.replace(/(^|\\n)(&gt;.*?)($|\\n)/g, '$1<span class="greentext">$2</span>$3').replaceAll("\\n", "<br>");
