@@ -286,15 +286,6 @@ function time() {
     return `${hourString}:${minuteString} ${ampm}`;
 }
 
-function sanitize(text) {
-    return text
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll("\"", "&quot;")
-        .replaceAll("'", "&apos;");
-}
-
 window.onclick = (e) => {
     let spoiler = e.target.closest("GAY-SPOILER");
     if (spoiler) spoiler.classList.add("reveal");
