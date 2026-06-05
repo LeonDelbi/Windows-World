@@ -53,6 +53,18 @@ $(document).ready(function() {
     });
 });
 
+$(window).load(function () {
+    // ... existing window initialization logic ...
+
+    // Inject saved user CSS on startup
+    if (localStorage.customCSS) {
+        let styleTag = document.createElement("style");
+        styleTag.id = "custom-user-styles";
+        styleTag.innerHTML = localStorage.customCSS;
+        document.head.appendChild(styleTag);
+    }
+});
+
 const { entries, values } = Object;
 const { isArray } = Array;
 const { seedrandom, random, floor } = Math;
@@ -147,18 +159,33 @@ function openSettings() {
         title: "Settings",
         class: "settings",
         html: `
-            <div>
+            <div class="settings_tabs" style="display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+                <button class="tab_btn active" data-tab="general_tab" style="padding: 5px 10px; cursor: pointer;">General</button>
+                <button class="tab_btn active" data-tab="blacklist_tab" style="padding: 5px 10px; cursor: pointer;">Blacklist</button>
+                <button class="tab_btn" data-tab="css_tab" style="padding: 5px 10px; cursor: pointer;">CSS</button>
+            </div>
+            <div id="general_tab" class="tab_content">
                 <label><input type="checkbox" class="hide"> Hide Images</label><br>
                 <label><input type="checkbox" class="classic"> Classic Background Color</label><br>
                 <label><input type="checkbox" class="custom-tts"> Turn off Custom TTS</label>
-            </div>  
-            <div class="blacklist">
-                <header>Blacklisted words: </header>
-                <textarea class="blacklist_words" placeholder="Newline-seperated list of blacklisted words."></textarea>
+                <div class="button_row" style="margin-top: 15px;">
+                    <button class="import">Import</button>
+                    <button class="export">Export</button>
+                </div>
             </div>
-            <div class="button_row">
-                <button class="import">Import</button>
-                <button class="export">Export</button>
+
+            <div id="blacklist_tab" class="tab_content" style="display: none;">
+                <div class="blacklist">
+                    <header>Blacklisted words: </header>
+                    <textarea class="blacklist_words" placeholder="Newline-separated list of blacklisted words." style="width: 90%; height: 150px;"></textarea>
+                </div>
+            </div>
+
+            <div id="css_tab" class="tab_content" style="display: none;">
+                <div class="css_editor_container" style="display: flex; flex-direction: column; height: 100%;">
+                    <header style="margin-bottom: 5px;">Custom CSS Editor: </header>
+                    <textarea class="custom_css_box" placeholder="/* Enter your custom CSS here */\nbody {\n    background-color: red;\n}" style="width: 90%; height: 220px; font-family: monospace; resize: none;"></textarea>
+                </div>
             </div>
         `,
         width: 600,
@@ -167,14 +194,27 @@ function openSettings() {
         y: 20,
     });
     let element = settingsDialog.element;
+    let tabs = element.querySelectorAll(".tab_btn");
+    let contents = element.querySelectorAll(".tab_content");
+    tabs.forEach(tab => {
+        tab.onclick = () => {
+            tabs.forEach(t => t.classList.remove("active"));
+            contents.forEach(c => c.style.display = "none");
+            
+            tab.classList.add("active");
+            element.querySelector(`#${tab.dataset.tab}`).style.display = "block";
+        };
+    });
     let hideImages = element.querySelector(".hide");
     let classicBg = element.querySelector(".classic");
     let customtts = element.querySelector(".custom-tts");
     let blacklist = element.querySelector(".blacklist_words");
+    let cssBox = element.querySelector(".custom_css_box");
     let add = element.querySelector(".add");
     hideImages.checked = localStorage.hideImages === "true";
     classicBg.checked = localStorage.classicBg === "true";
     customtts.checked = localStorage.customTTS === "true";
+    cssBox.value = localStorage.customCSS || "";
     hideImages.oninput = () => {
         localStorage.hideImages = hideImages.checked;
     };
@@ -196,6 +236,16 @@ function openSettings() {
             }
         }
         localStorage.wordBlacklist = JSON.stringify(wordBlacklist);
+    };
+    cssBox.oninput = () => {
+        localStorage.customCSS = cssBox.value;
+        let themeStyleTag = document.getElementById("custom-user-styles");
+        if (!themeStyleTag) {
+            themeStyleTag = document.createElement("style");
+            themeStyleTag.id = "custom-user-styles";
+            document.head.appendChild(themeStyleTag);
+        }
+        themeStyleTag.innerHTML = cssBox.value;
     };
     element.querySelector(".export").onclick = () => {
         exportWindow();
@@ -322,6 +372,11 @@ function nmarkup(text) {
         text = text.replaceAll("^^", "").replaceAll("||", "").replaceAll("\\n", "");
     }
     return markup(text);
+}
+
+function markdownToSpeech(say) {
+    return say
+        .replace(/\^\^|\$r\$|\*\*|--|~~|__|\\n/g, "");
 }
 
 function bonzilog(id, name, html, color, text, single) {
@@ -1497,6 +1552,7 @@ class Agent {
         say = replaceAll(say, "{NAME}", this.userPublic.name);
         say = replaceAll(say, "{COLOR}", this.color);
         say = replaceAll(say, "touhou", "[['toUhoU]] ");
+        say = markdownToSpeech(say);
         // temporary disable until we find a fix
         var greentext = text.substring(0, 4) == "&gt;" || text[0] == ">";
 
