@@ -5,10 +5,10 @@
 			"name_limit": 25,
 			"godword": "",
 			"bonzitv_code": "",
-			"mod_code": "MFimco123",
+			"mod_code": "friv12345",
 			"dev_code": "",
 			"real_code": "",
-			"techy": "MFimco123",
+			"techy": "friv12345",
 			"runlevel": {
 				"godmode": 0,
 				"youtube": 0,
@@ -180,7 +180,10 @@
 		"blob",
 		"maxalert",
 		"james",
-		"kinito"
+		"kinito",
+		"alex_parr",
+		"tivoguy123",
+		"kaipixelleap7800"
 	],
 	"secretAgents": [
 		"squidward",
@@ -193,9 +196,7 @@
 		"reimu",
 		"marisa",
 		"peetzuh",
-		"bluestickman",
-                "alex_parr",
-                "tivoguy123"
+		"bluestickman"
 	],
 	"banLength": 1440,
 	"port": 3000,
