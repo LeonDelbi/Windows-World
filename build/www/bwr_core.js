@@ -375,8 +375,9 @@ function nmarkup(text) {
 }
 
 function markdownToSpeech(say) {
-    return say
-        .replace(/\^\^|\$r\$|\*\*|--|~~|__|\\n/g, "");
+    let tokens = [...Object.keys(rules), "\\n"];
+    let regex = new RegExp(tokens.map(t => t === "\\n" ? "\\\\n" : t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "g");
+    return say.replace(regex, "");
 }
 
 function bonzilog(id, name, html, color, text, single) {
@@ -1631,7 +1632,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1648,7 +1649,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1665,7 +1666,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1682,7 +1683,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1699,7 +1700,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1716,7 +1717,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1733,7 +1734,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1750,7 +1751,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1767,7 +1768,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1784,7 +1785,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1801,7 +1802,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1818,7 +1819,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1835,7 +1836,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1852,7 +1853,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1869,7 +1870,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1886,7 +1887,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1903,7 +1904,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1920,7 +1921,7 @@ class Agent {
                     this.$dialogCont["html"](`Loading...<br><progress></progress>`)
 					audio.onloadeddata = function()
                     {
-                        _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                        _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                         bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                     }
 					audio.onended = function()
@@ -1931,7 +1932,7 @@ class Agent {
 				}
             } else {
 
-                this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                 bonzilog(this.id, this.userPublic.name, html, this.color, html, false);
                 if (text.includes("[audio=") && localStorage.customTTS == "true") {
                     text = parseAudioTag(text).cleanText;
@@ -1972,7 +1973,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -1989,7 +1990,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -2006,7 +2007,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -2023,7 +2024,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2040,7 +2041,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2057,7 +2058,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2073,7 +2074,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2090,7 +2091,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2106,7 +2107,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2169,7 +2170,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -2186,7 +2187,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -2203,7 +2204,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -2220,7 +2221,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2237,7 +2238,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2254,7 +2255,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2271,7 +2272,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2288,7 +2289,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2304,7 +2305,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             this.audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             this.audio.onended = function()
@@ -2321,7 +2322,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -2338,7 +2339,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
@@ -2355,7 +2356,7 @@ class Agent {
                             this.$dialogCont["html"](`Loading...<br><progress></progress>`)
                             audio.onloadeddata = function()
                             {
-                                _this.$dialogCont["text"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
+                                _this.$dialogCont["html"](html)[greentext ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block");
                                 bonzilog(_this.id, _this.userPublic.name, html, _this.color, html, false);
                             }
                             audio.onended = function()
