@@ -441,7 +441,7 @@ Ban.init();
 // Start actually listening
 server.listen(port, function () {
 	console.log(
-		"Welcome to Windows XP Chat Edition! Time to meme!\nServer listening at port " + port
+		"Welcome to Windows World! Time to meme!\nServer listening at port " + port
 	);
 });
 app.use(express.static(__dirname + '/public'));
